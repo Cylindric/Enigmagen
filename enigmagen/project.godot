@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="Enigmagen"
+run/main_scene="uid://ctxtum0p3w5cb"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[dotnet]
+
+project/assembly_name="Enigmagen"
 
 [editor]
 
