@@ -1,0 +1,24 @@
+# ansible-playbook setup.ansible.yaml --extra-vars="ansible_become_pass=<BECOME_PASS>"
+---
+- name: Setup dev host
+  hosts: localhost
+  vars:
+    godot_version: 4.4.1-stable
+    bin_dir: "{{ playbook_dir | dirname }}/bin"
+
+  pre_tasks:
+    - name: Create local bin folder
+      ansible.builtin.file:
+        path: "/home/{{ ansible_user_id }}/.local/bin"
+        mode: '0775'
+        state: directory
+
+    - name: Create dev bin folder
+      ansible.builtin.file:
+        path: "{{ bin_dir }}"
+        mode: '0775'
+        state: directory
+
+  roles:
+    - role: godot
+    - role: pixelorama
