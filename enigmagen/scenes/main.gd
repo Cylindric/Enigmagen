@@ -1,75 +1,26 @@
 extends Node2D
 
-@onready var dirt_tilemap = $DirtTileMap
-@onready var wall_tilemap = $WallTileMap
+@onready var surface: TileMapLayer = %Surface
 
 var rng = RandomNumberGenerator.new()
-
-var CellSize = Vector2(16, 16)
-var width = 1024/CellSize.x
-var height = 1024/CellSize.y
-var grid = []
-
-var Tiles = {
-	"empty": -1,
-	"wall": 0,
-	"floor": 1
-}
-
-func _init_grid():
-	grid = []
-	for x in width:
-		grid.append([])
-		for y in height:
-			grid[x].append(-1);
-
-func GetRandomDirection():
-	var directions = [[-1, 0], [1, 0], [0, 1], [0, -1]]
-	var direction = directions[rng.randi()%4]
-	return Vector2(direction[0], direction[1])
-
-func _create_random_path():
-	var max_iterations = 1000
-	var itr = 0
-	
-	var walker = Vector2.ZERO
-	
-	while itr < max_iterations:
-		var random_direction = GetRandomDirection()
-		
-		if (walker.x + random_direction.x >= 0 and 
-			walker.x + random_direction.x < width and 
-			walker.y + random_direction.y >= 0 and
-			walker.y + random_direction.y < height):
-				
-				walker += random_direction
-				grid[walker.x][walker.y] = Tiles.floor
-				itr += 1
-
-func _spawn_tiles():
-	for x in width:
-		for y in height:
-  
-			match grid[x][y]:
-				Tiles.empty:
-					pass
-				Tiles.floor:
-					dirt_tilemap.set_cellv(Vector2(x, y), 0)
-				Tiles.wall:
-					pass
-
-func _clear_tilemaps():
-	for x in width:
-		for y in height:
-			dirt_tilemap.clear()
-			wall_tilemap.clear()
-  
-	dirt_tilemap.update_bitmask_region()
-	wall_tilemap.update_bitmask_region()
 
 func _ready():
 	rng.randomize()
 	_init_grid()
-	_clear_tilemaps()
-	_create_random_path()
-	_spawn_tiles()
+
+func _init_grid() -> void:
+	var screen_size := DisplayServer.window_get_size()
+
+	@warning_ignore("integer_division")
+	var columns := screen_size.x / 64
+
+	@warning_ignore("integer_division")
+	var rows := screen_size.y / 64
+	
+	print("Screen size is ", screen_size, " @ ", DisplayServer.screen_get_scale())
+	print("Creating map with ", columns, " columns and ", rows, " rows.")
+	
+	for col in columns:
+		for row in rows:
+			var tile := rng.randi_range(0, 1)
+			surface.set_cell(Vector2(col, row), 0, Vector2(tile, 0))
