@@ -22,3 +22,4 @@ godot
 
 # Project-specific ignores
 tools/
+automation/vars.yaml
