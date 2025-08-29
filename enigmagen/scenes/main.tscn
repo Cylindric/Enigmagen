@@ -11,6 +11,7 @@ texture_region_size = Vector2i(64, 64)
 1:0/next_alternative_id = 3
 1:0/0 = 0
 2:0/0 = 0
+3:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_sugp2"]
 tile_size = Vector2i(64, 64)

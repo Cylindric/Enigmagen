@@ -1,12 +1,12 @@
 ---
-- name: Pixelorama | Download Pixelorama
+- name: "Pixelorama : Download Pixelorama"
   ansible.builtin.unarchive:
     src: https://github.com/Orama-Interactive/Pixelorama/releases/download/v{{ pixelorama_version }}/Pixelorama-Linux-64bit.tar.gz
     dest: "{{ bin_dir }}"
     remote_src: true
     creates: "{{ bin_dir }}/Pixelorama-Linux-64bit/Pixelorama.x86_64"
 
-- name: Pixelorama | Link the Pixelorama binary into user's bin
+- name: "Pixelorama : Link the Pixelorama binary into user's bin"
   ansible.builtin.file:
     src: "{{ bin_dir }}/Pixelorama-Linux-64bit/Pixelorama.x86_64"
     dest: "{{ bin_dir }}/pixelorama"

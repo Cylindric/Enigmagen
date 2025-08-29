@@ -1,6 +1,6 @@
 # ansible-playbook build_spritesheets.yaml
 ---
-- name: Setup dev host
+- name: "Setup dev host"
   hosts: localhost
   vars:
     bin_dir: "{{ playbook_dir | dirname }}/bin"
@@ -21,7 +21,18 @@
   #       state: directory
 
   tasks:
-    - name: "Generate sprite-sheet"
+    - name: "Get existing spritesheet modified stats"
+      ansible.builtin.stat:
+        path: "{{ tilesets_dir }}/mars_surface.png"
+      register: output_stats
+
+    - name: "Get current source modified stats"
+      ansible.builtin.stat:
+        path: "{{ asset_sources_dir }}/mars/mars_surface.pxo"
+      register: input_stats
+
+    - name: "Regenerate sprite-sheet"
+      when: not output_stats.stat.exists or input_stats.stat.mtime > output_stats.stat.mtime
       ansible.builtin.command:
         argv:
           - "{{ bin_dir }}/pixelorama"
@@ -31,7 +42,4 @@
           - "--output"
           - "{{ tilesets_dir }}/mars_surface.png"
           - "{{ asset_sources_dir }}/mars/mars_surface.pxo"
-
-
-
-# /home/mark/dev/Enigmagen/bin/pixelorama --headless --quit --spritesheet --output /home/mark/dev/Enigmagen/enigmagen/tilesets/mars_surface.png /home/mark/dev/Enigmagen/asset_sources/mars/mars_surface.pxo
+      changed_when: true
