@@ -24,3 +24,4 @@
   roles:
     - role: godot
     - role: pixelorama
+    - role: aseprite

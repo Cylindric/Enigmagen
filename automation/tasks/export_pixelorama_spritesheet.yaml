@@ -1,0 +1,23 @@
+---
+- name: "Get existing spritesheet modified stats ({{ item }})"
+  ansible.builtin.stat:
+    path: "{{ tilesets_dir }}/{{ item }}.png"
+  register: output_stats
+
+- name: "Get current source modified stats ({{ item }})"
+  ansible.builtin.stat:
+    path: "{{ asset_sources_dir }}/{{ item }}.pxo"
+  register: input_stats
+
+- name: "Regenerate Pixelorama sprite-sheet ({{ item }})"
+  when: not output_stats.stat.exists or input_stats.stat.mtime > output_stats.stat.mtime
+  ansible.builtin.command:
+    argv:
+      - "{{ bin_dir }}/pixelorama"
+      - "--headless"
+      - "--quit"
+      - "--spritesheet"
+      - "--output"
+      - "{{ tilesets_dir }}/{{ item }}.png"
+      - "{{ asset_sources_dir }}/{{ item }}.pxo"
+  changed_when: true

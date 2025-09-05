@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clg8mqp8g85oa"
-path="res://.godot/imported/mars_surface.png-155a57e761531e90b29f7f7cff448fe9.ctex"
+uid="uid://bcnooosdcfq6h"
+path="res://.godot/imported/astronaut.png-cd8ad1ce6406c47e07c8530a6a574083.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tilesets/mars_surface.png"
-dest_files=["res://.godot/imported/mars_surface.png-155a57e761531e90b29f7f7cff448fe9.ctex"]
+source_file="res://tilesets/mars/astronaut.png"
+dest_files=["res://.godot/imported/astronaut.png-cd8ad1ce6406c47e07c8530a6a574083.ctex"]
 
 [params]
 

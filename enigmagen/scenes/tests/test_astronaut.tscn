@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlrb1fjo6fbuu"]
+
+[ext_resource type="PackedScene" uid="uid://dfjunw2qri43f" path="res://objects/characters/astronaut/astronaut.tscn" id="1_on0e3"]
+
+[node name="TestAstronaut" type="Node2D"]
+
+[node name="Astronaut" parent="." instance=ExtResource("1_on0e3")]
+position = Vector2(71, 57)

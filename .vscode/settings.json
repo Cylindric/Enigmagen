@@ -1,3 +1,4 @@
 {
-    "ansible.python.interpreterPath": "/usr/bin/python"
+    "ansible.python.interpreterPath": "/usr/bin/python",
+    "godotTools.editorPath.godot4": "/home/mark/dev/enigmagen/bin/Godot_v4.4.1-stable_linux.x86_64"
 }

@@ -1,0 +1,7 @@
+---
+- name: Godot | Link the Asperite binary into user's bin
+  ansible.builtin.file:
+    src: "/usr/bin/aseprite"
+    dest: "{{ bin_dir }}/aseprite"
+    state: link
+    mode: '0755'

@@ -2,44 +2,20 @@
 ---
 - name: "Setup dev host"
   hosts: localhost
+  gather_facts: false
   vars:
     bin_dir: "{{ playbook_dir | dirname }}/bin"
     asset_sources_dir: "{{ playbook_dir | dirname }}/asset_sources"
     tilesets_dir: "{{ playbook_dir | dirname }}/enigmagen/tilesets"
 
-  # pre_tasks:
-  #   - name: Create local bin folder
-  #     ansible.builtin.file:
-  #       path: "/home/{{ ansible_user_id }}/.local/bin"
-  #       mode: '0775'
-  #       state: directory
-
-  #   - name: Create dev bin folder
-  #     ansible.builtin.file:
-  #       path: "{{ bin_dir }}"
-  #       mode: '0775'
-  #       state: directory
-
   tasks:
-    - name: "Get existing spritesheet modified stats"
-      ansible.builtin.stat:
-        path: "{{ tilesets_dir }}/mars_surface.png"
-      register: output_stats
+    - name: "Process PXOs"
+      include_tasks: tasks/export_pixelorama_spritesheet.yaml
+      loop:
+        - "mars/mars_surface"
 
-    - name: "Get current source modified stats"
-      ansible.builtin.stat:
-        path: "{{ asset_sources_dir }}/mars/mars_surface.pxo"
-      register: input_stats
-
-    - name: "Regenerate sprite-sheet"
-      when: not output_stats.stat.exists or input_stats.stat.mtime > output_stats.stat.mtime
-      ansible.builtin.command:
-        argv:
-          - "{{ bin_dir }}/pixelorama"
-          - "--headless"
-          - "--quit"
-          - "--spritesheet"
-          - "--output"
-          - "{{ tilesets_dir }}/mars_surface.png"
-          - "{{ asset_sources_dir }}/mars/mars_surface.pxo"
-      changed_when: true
+    - name: "Process Aesprites"
+      include_tasks: tasks/export_aseprite_spritesheet.yaml
+      loop:
+        - "mars/astronaut"
+        - "mars/small_rover"

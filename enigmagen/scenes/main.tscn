@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ctxtum0p3w5cb"]
 
 [ext_resource type="Script" uid="uid://djohh7lrcwee2" path="res://scenes/main.gd" id="1_0wfyh"]
-[ext_resource type="Texture2D" uid="uid://clg8mqp8g85oa" path="res://tilesets/mars_surface.png" id="2_0wfyh"]
+[ext_resource type="Texture2D" uid="uid://clg8mqp8g85oa" path="res://tilesets/mars/mars_surface.png" id="2_0wfyh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wfyh"]
 texture = ExtResource("2_0wfyh")
