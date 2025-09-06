@@ -2,13 +2,10 @@ extends NodeState
 
 
 @onready var entity: Astronaut = $"../.."
-@onready var animation: AnimatedSprite2D = $"../../Animation"
+@onready var animation: AnimatedSprite2D = %Animation
 
 
 func _on_physics_process(_delta: float) -> void:
-	var direction: Vector2 = GameInputEvents.movement_input()
-	entity.direction = direction
-
 	if entity.direction == Vector2.LEFT:
 		animation.play("idle_left")
 	elif entity.direction == Vector2.RIGHT:

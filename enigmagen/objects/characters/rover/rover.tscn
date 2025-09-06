@@ -1,0 +1,119 @@
+[gd_scene load_steps=16 format=3 uid="uid://u2tsjjiwkrya"]
+
+[ext_resource type="Script" uid="uid://cf3vp458rly15" path="res://objects/characters/rover/rover.gd" id="1_0y23f"]
+[ext_resource type="Texture2D" uid="uid://br0ga16xnyxqu" path="res://tilesets/mars/small_rover.png" id="1_xx77p"]
+[ext_resource type="Script" uid="uid://cja5y846t1wbq" path="res://scripts/state_machine/state_machine.gd" id="2_mh7rd"]
+[ext_resource type="Script" uid="uid://r3bug8emlhx" path="res://objects/characters/rover/state_idle.gd" id="4_g1ata"]
+[ext_resource type="Script" uid="uid://en30g1oitewe" path="res://objects/characters/rover/state_walk.gd" id="5_g1ata"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xx77p"]
+atlas = ExtResource("1_xx77p")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mh7rd"]
+atlas = ExtResource("1_xx77p")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75jwk"]
+atlas = ExtResource("1_xx77p")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sndky"]
+atlas = ExtResource("1_xx77p")
+region = Rect2(80, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6sjkt"]
+atlas = ExtResource("1_xx77p")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_js0tu"]
+atlas = ExtResource("1_xx77p")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0y23f"]
+atlas = ExtResource("1_xx77p")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1ata"]
+atlas = ExtResource("1_xx77p")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_75jwk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xx77p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mh7rd")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75jwk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sndky")
+}],
+"loop": true,
+"name": &"idle_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6sjkt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_js0tu")
+}],
+"loop": true,
+"name": &"idle_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0y23f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1ata")
+}],
+"loop": true,
+"name": &"idle_up",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g1ata"]
+radius = 6.0
+
+[node name="Rover" type="CharacterBody2D"]
+script = ExtResource("1_0y23f")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_75jwk")
+animation = &"idle_up"
+autoplay = "idle_up"
+frame_progress = 0.799994
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_g1ata")
+
+[node name="NavigationAgent" type="NavigationAgent2D" parent="."]
+unique_name_in_owner = true
+path_postprocessing = 1
+debug_enabled = true
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_node_state")]
+script = ExtResource("2_mh7rd")
+initial_node_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_g1ata")
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("5_g1ata")
+
+[node name="Marker2D" type="Line2D" parent="."]

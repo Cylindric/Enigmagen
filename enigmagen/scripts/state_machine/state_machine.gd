@@ -3,9 +3,16 @@ extends Node
 
 @export var initial_node_state : NodeState
 
+## The list of States available to this StateMachine
 var node_states : Dictionary = {}
+
+## The current State of the StateMachine
 var current_node_state : NodeState
+
+## The display name of the current State, used for debugging
 var current_node_state_name : String
+
+## The name of the entity this StateMachine is attached to
 var parent_node_name: String
 
 
@@ -50,4 +57,4 @@ func transition_to(node_state_name : String) -> void:
 
 	current_node_state = new_node_state
 	current_node_state_name = current_node_state.name.to_lower()
-	#print("Current State: ", current_node_state_name)
+	print("Current State: ", current_node_state_name)

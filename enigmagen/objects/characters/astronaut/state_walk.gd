@@ -1,5 +1,6 @@
 extends NodeState
 
+@export var speed: int = 50
 
 @onready var entity: Astronaut = $"../.."
 @onready var animation: AnimatedSprite2D = $"../../Animation"
@@ -7,18 +8,21 @@ extends NodeState
 
 func _on_physics_process(_delta: float) -> void:
 	var direction: Vector2 = GameInputEvents.movement_input()
-	entity.direction = direction
 
 	if entity.direction == Vector2.LEFT:
-		animation.play("idle_left")
+		animation.play("walk_left")
 	elif entity.direction == Vector2.RIGHT:
-		animation.play("idle_right")
+		animation.play("walk_right")
 	elif entity.direction == Vector2.UP:
-		animation.play("idle_up")
+		animation.play("walk_up")
 	elif entity.direction == Vector2.DOWN:
-		animation.play("idle_down")
-	else:
-		animation.play("idle_down")
+		animation.play("walk_down")
+
+	if direction != Vector2.ZERO:
+		entity.direction = direction
+
+	entity.velocity = direction * speed
+	entity.move_and_slide()
 
 
 func _on_next_transitions() -> void:

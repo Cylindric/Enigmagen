@@ -5,17 +5,18 @@ static var direction: Vector2
 
 
 static func movement_input() -> Vector2:
+	direction = Vector2.ZERO
+	
 	if Input.is_action_pressed("move_left"):
-		direction = Vector2.LEFT
-	elif Input.is_action_pressed("move_right"):
-		direction = Vector2.RIGHT
-	elif Input.is_action_pressed("move_up"):
-		direction = Vector2.UP
-	elif Input.is_action_pressed("move_down"):
-		direction = Vector2.DOWN
-	else:
-		direction = Vector2.ZERO
+		direction += Vector2.LEFT
+	if Input.is_action_pressed("move_right"):
+		direction += Vector2.RIGHT
+	if Input.is_action_pressed("move_up"):
+		direction += Vector2.UP
+	if Input.is_action_pressed("move_down"):
+		direction += Vector2.DOWN
 
+	direction = direction.normalized()
 	return direction
 
 

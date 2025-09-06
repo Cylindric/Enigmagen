@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Enigmagen"
-run/main_scene="uid://dlrb1fjo6fbuu"
+run/main_scene="uid://d3p8m417bdrvh"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -19,8 +19,8 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=320
 window/size/viewport_height=240
-window/size/window_width_override=960
-window/size/window_height_override=720
+window/size/window_width_override=1440
+window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_width"
 
@@ -38,7 +38,8 @@ version_control/autoload_on_startup=true
 folder_colors={
 "res://objects/": "blue",
 "res://scenes/": "green",
-"res://scripts/": "pink"
+"res://scripts/": "pink",
+"res://tilesets/": "purple"
 }
 
 [input]

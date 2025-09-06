@@ -1,19 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlrb1fjo6fbuu"]
+[gd_scene load_steps=3 format=3 uid="uid://d3p8m417bdrvh"]
 
-[ext_resource type="PackedScene" uid="uid://dfjunw2qri43f" path="res://objects/characters/astronaut/astronaut.tscn" id="1_on0e3"]
-[ext_resource type="PackedScene" uid="uid://u2tsjjiwkrya" path="res://objects/characters/rover/rover.tscn" id="2_6xb1h"]
+[ext_resource type="PackedScene" uid="uid://u2tsjjiwkrya" path="res://objects/characters/rover/rover.tscn" id="2_grw5h"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_6xb1h"]
 vertices = PackedVector2Array(302.75, 21.0625, 298.258, 208.594, 242.461, 201.047, 218.711, 77.3281, 150.797, 126.25, 14.9219, 135.312, 14.0703, 22.9297, 207.523, 73.6562)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(7, 6, 0), PackedInt32Array(0, 3, 7)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(210, 85, 155, 136, 5, 146, 4, 13, 313, 11, 308, 220, 234, 210)])
 
-[node name="TestAstronaut" type="Node2D"]
+[node name="TestRover" type="Node2D"]
 
-[node name="Astronaut" parent="." instance=ExtResource("1_on0e3")]
-position = Vector2(71, 57)
-
-[node name="Rover" parent="." instance=ExtResource("2_6xb1h")]
+[node name="Rover" parent="." instance=ExtResource("2_grw5h")]
 position = Vector2(96, 74)
 
 [node name="RoverNavigationRegion" type="NavigationRegion2D" parent="."]
